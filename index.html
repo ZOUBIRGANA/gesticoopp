@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GestiCoop - Offres de stage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="brand">
+        <strong>GestiCoop</strong>
+        <span>Gestion des stages coopératifs</span>
+    </div>
+
+    <div class="user">
+        <span>2025–2026</span>
+        <div class="avatar">KA</div>
+        <div>K. Aladji<small>Coordonnateur</small></div>
+    </div>
+</header>
+
+<aside class="sidebar">
+    <div class="side-brand">
+        <h2>GestiCoop</h2>
+        <p>Stages coopératifs</p>
+    </div>
+
+    <nav>
+        <a href="#" data-page="Tableau de bord">⌂ Tableau de bord</a>
+        <a href="#" class="active" data-page="Offres de stage">▣ Offres de stage</a>
+        <a href="#" data-page="Étudiants">♙ Étudiants</a>
+        <a href="#" data-page="Candidatures">▤ Candidatures</a>
+        <a href="#" data-page="Entreprises">▦ Entreprises</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <strong>K. Aladji</strong>
+        <small>Coordonnateur</small>
+    </div>
+</aside>
+
+<main class="main">
+    <div class="page-heading">
+        <h1>Offres de stage</h1>
+        <p>Publier une nouvelle offre et consulter la liste des offres existantes</p>
+    </div>
+
+    <section class="panel">
+        <h2 class="section-title">
+            <span class="icon">＋</span>
+            Nouvelle offre de stage
+        </h2>
+
+        <form id="offerForm">
+            <div class="fields">
+                <label>
+                    Entreprise <em>*</em>
+                    <select id="company" required>
+                        <option value="">Sélectionner une entreprise...</option>
+                        <option>Ubisoft Montréal</option>
+                        <option>CAE Inc.</option>
+                        <option>Bell Canada</option>
+                        <option>Desjardins</option>
+                        <option>Hydro-Québec</option>
+                    </select>
+                </label>
+
+                <label>
+                    Programme(s) visé(s) <em>*</em>
+                    <select id="program" required>
+                        <option value="">Sélectionner un programme...</option>
+                        <option>Informatique</option>
+                        <option>Réseautique</option>
+                        <option>Développement logiciel</option>
+                        <option>Cybersécurité</option>
+                    </select>
+                </label>
+
+                <label>
+                    Type de stage <em>*</em>
+                    <select id="type" required>
+                        <option>Stage coopératif</option>
+                        <option>Stage rémunéré</option>
+                        <option>Stage non rémunéré</option>
+                    </select>
+                </label>
+
+                <label>
+                    Titre du poste <em>*</em>
+                    <input id="title" placeholder="Ex. : Développeur junior" required>
+                </label>
+
+                <label>
+                    Lieu de travail <em>*</em>
+                    <input id="location" placeholder="Ex. : Montréal, QC" required>
+                </label>
+
+                <label>
+                    Date de début <em>*</em>
+                    <input id="start" type="date" required>
+                </label>
+
+                <label>
+                    Date de fin <em>*</em>
+                    <input id="end" type="date" required>
+                </label>
+
+                <label class="description">
+                    Description <em>*</em>
+                    <textarea id="description" maxlength="1000"
+                        placeholder="Décrivez les tâches et responsabilités du stage..."
+                        required></textarea>
+                    <small id="counter">0 / 1000</small>
+                </label>
+
+                <label>
+                    Nombre de postes <em>*</em>
+                    <input id="positions" type="number" min="1" value="1" required>
+                </label>
+
+                <label>
+                    Statut initial <em>*</em>
+                    <select id="status">
+                        <option>Ouvert</option>
+                        <option>En évaluation</option>
+                        <option>Fermé</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="form-actions">
+                <button type="reset" class="btn light">Réinitialiser</button>
+                <button type="submit" class="btn primary">➤ Publier l'offre</button>
+            </div>
+
+            <p id="formMessage" role="status"></p>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="list-toolbar">
+            <h2 class="section-title">
+                <span class="icon">☷</span>
+                Liste des offres de stage
+            </h2>
+
+            <div class="filters">
+                <input id="search" type="search"
+                    placeholder="⌕ Rechercher une offre...">
+
+                <select id="statusFilter">
+                    <option value="">Tous les statuts</option>
+                    <option>Ouvert</option>
+                    <option>En évaluation</option>
+                    <option>Fermé</option>
+                    <option>Expiré</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ENTREPRISE</th>
+                        <th>POSTE</th>
+                        <th>PROGRAMME</th>
+                        <th>LIEU</th>
+                        <th>DÉBUT</th>
+                        <th>FIN</th>
+                        <th>STATUT</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody id="offersBody"></tbody>
+            </table>
+        </div>
+
+        <div class="table-footer">
+            <span id="resultCount"></span>
+            <div class="pagination">
+                <button type="button" aria-label="Page précédente">‹</button>
+                <button type="button" class="current-page">1</button>
+                <button type="button" aria-label="Page suivante">›</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>GestiCoop · Gestion des stages coopératifs</footer>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
